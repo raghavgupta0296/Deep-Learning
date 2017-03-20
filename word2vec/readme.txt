@@ -1,5 +1,7 @@
 word2vec For Word Embeddings in Tensorflow
 
+In word2vec.py, feed your textfile name in f = open("<filename>.txt")
+
 word2vec puts words into a feature space and captures their relationship with other words.
 This is extremely useful for NLP related tasks/applications.
 The tensorflow documentation is very good at explaining as well as the implementation.
