@@ -122,7 +122,7 @@ with graph.as_default():
     w = tf.Variable(tf.truncated_normal([vocab_size, embedding_size], stddev=1.0 / math.sqrt(embedding_size)))
     b = tf.Variable(tf.zeros([vocab_size]))
 
-    loss = tf.reduce_mean(tf.nn.nce_loss(weights=w, biases=b, labels=train_y, inputs=embed, num_sampled=neg_samples,
+    loss = tf.reduce_mean(tf.nn.sampled_softmax_loss(weights=w, biases=b, labels=train_y, inputs=embed, num_sampled=neg_samples,
                                          num_classes=vocab_size))
 
     optimizer = tf.train.GradientDescentOptimizer(1.0).minimize(loss)
@@ -170,7 +170,7 @@ with tf.Session(graph=graph) as session:
 
 # PLOTTING
 
-def plot_with_labels(low_dim_embs, labels, filename='tsneRap.png'):
+def plot_with_labels(low_dim_embs, labels, filename='tsnePlot.png'):
   assert low_dim_embs.shape[0] >= len(labels), "More labels than embeddings"
   plt.figure(figsize=(18, 18))  # in inches
   for i, label in enumerate(labels):
